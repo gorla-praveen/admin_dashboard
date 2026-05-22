@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – AdminX</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Sidebar Overlay (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-logo">A</div>
+    <div class="brand-name">Admin<span>X</span></div>
+  </div>
+
+  <nav class="sidebar-menu">
+    <div class="menu-section-title">Main</div>
+
+    <div class="sidebar-item">
+      <a href="dashboard.html" class="sidebar-link active">
+        <i class="bi bi-grid-fill"></i>
+        <span>Dashboard</span>
+      </a>
+    </div>
+
+    <div class="menu-section-title">Management</div>
+
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link" data-submenu>
+        <i class="bi bi-people-fill"></i>
+        <span>Users</span>
+        <i class="bi bi-chevron-right arrow"></i>
+      </a>
+      <ul class="sidebar-submenu">
+        <li class="sidebar-item"><a href="#" class="sidebar-link"><span>All Users</span></a></li>
+        <li class="sidebar-item"><a href="#" class="sidebar-link"><span>Add User</span></a></li>
+        <li class="sidebar-item"><a href="#" class="sidebar-link"><span>Roles</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link" data-submenu>
+        <i class="bi bi-box-seam-fill"></i>
+        <span>Products</span>
+        <i class="bi bi-chevron-right arrow"></i>
+      </a>
+      <ul class="sidebar-submenu">
+        <li class="sidebar-item"><a href="#" class="sidebar-link"><span>Product List</span></a></li>
+        <li class="sidebar-item"><a href="#" class="sidebar-link"><span>Add Product</span></a></li>
+        <li class="sidebar-item"><a href="#" class="sidebar-link"><span>Categories</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="bi bi-receipt-cutoff"></i>
+        <span>Orders</span>
+        <span class="badge-sidebar">12</span>
+      </a>
+    </div>
+
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="bi bi-bar-chart-line-fill"></i>
+        <span>Analytics</span>
+      </a>
+    </div>
+
+    <div class="menu-section-title">Finance</div>
+
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="bi bi-wallet2"></i>
+        <span>Transactions</span>
+      </a>
+    </div>
+
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="bi bi-file-earmark-text-fill"></i>
+        <span>Reports</span>
+      </a>
+    </div>
+
+    <div class="menu-section-title">System</div>
+
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="bi bi-gear-fill"></i>
+        <span>Settings</span>
+      </a>
+    </div>
+
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="bi bi-bell-fill"></i>
+        <span>Notifications</span>
+        <span class="badge-sidebar">5</span>
+      </a>
+    </div>
+
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="bi bi-shield-lock-fill"></i>
+        <span>Security</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <img src="https://i.pravatar.cc/80?img=12" alt="Admin" />
+      <div class="user-info">
+        <div class="name">Alex Morgan</div>
+        <div class="role">Super Admin</div>
+      </div>
+    </div>
+  </div>
+</aside>
+<!-- ===== END SIDEBAR ===== -->
+
+<!-- ===== MAIN CONTENT ===== -->
+<div id="main-content">
+
+  <!-- ── TOPBAR ── -->
+  <header id="topbar">
+    <div class="topbar-left">
+      <button class="sidebar-toggle" id="sidebarToggle" data-bs-toggle="tooltip" title="Toggle Sidebar">
+        <i class="bi bi-list"></i>
+      </button>
+      <div>
+        <div class="page-title">Dashboard</div>
+        <div class="breadcrumb-custom">
+          <a href="#">Home</a> / <span>Dashboard</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="topbar-search">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search anything…" />
+      </div>
+
+      <!-- Notifications -->
+      <div style="position:relative;">
+        <button class="topbar-btn" id="notifBtn" data-bs-toggle="tooltip" title="Notifications">
+          <i class="bi bi-bell"></i>
+          <span class="notif-dot"></span>
+        </button>
+        <div class="notif-dropdown" id="notifDropdown">
+          <div class="notif-header">
+            <h6>Notifications</h6>
+            <a href="#">Mark all read</a>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:rgba(67,94,190,.12);color:#435ebe;">
+              <i class="bi bi-person-check-fill"></i>
+            </div>
+            <div class="notif-text">
+              <p>New user registered</p>
+              <span>2 minutes ago</span>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:rgba(25,135,84,.12);color:#198754;">
+              <i class="bi bi-cart-check-fill"></i>
+            </div>
+            <div class="notif-text">
+              <p>Order #1042 confirmed</p>
+              <span>15 minutes ago</span>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:rgba(220,53,69,.12);color:#dc3545;">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+            <div class="notif-text">
+              <p>Server CPU spike detected</p>
+              <span>1 hour ago</span>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:rgba(255,193,7,.15);color:#e6a817;">
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <div class="notif-text">
+              <p>New 5-star review received</p>
+              <span>3 hours ago</span>
+            </div>
+          </div>
+          <div style="padding:10px 18px; text-align:center;">
+            <a href="#" style="font-size:.8rem;color:var(--primary);font-weight:700;">View all notifications</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="#" class="topbar-btn" data-bs-toggle="tooltip" title="Messages">
+        <i class="bi bi-chat-dots"></i>
+      </a>
+      <a href="#" class="topbar-btn" data-bs-toggle="tooltip" title="Settings">
+        <i class="bi bi-gear"></i>
+      </a>
+
+      <div class="topbar-user">
+        <img src="https://i.pravatar.cc/80?img=12" alt="User" />
+        <span class="uname d-none d-sm-inline">Alex M.</span>
+        <i class="bi bi-chevron-down" style="font-size:.7rem;color:#8a8fa8;"></i>
+      </div>
+    </div>
+  </header>
+  <!-- ── END TOPBAR ── -->
+
+  <!-- ── PAGE CONTENT ── -->
+  <main class="page-content">
+
+    <!-- ══ ROW 1: STAT CARDS ══ -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-xl-2">
+        <div class="stat-card stat-primary">
+          <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Total Users</div>
+            <div class="stat-value" data-target="24,680" data-prefix="">0</div>
+            <div class="stat-change up"><i class="bi bi-arrow-up-short"></i>+8.2% this month</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-xl-2">
+        <div class="stat-card stat-success">
+          <div class="stat-icon"><i class="bi bi-cart-check-fill"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Orders</div>
+            <div class="stat-value" data-target="3842">0</div>
+            <div class="stat-change up"><i class="bi bi-arrow-up-short"></i>+5.1% this month</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-xl-2">
+        <div class="stat-card stat-warning">
+          <div class="stat-icon"><i class="bi bi-currency-dollar"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Revenue</div>
+            <div class="stat-value" data-target="89240" data-prefix="$">0</div>
+            <div class="stat-change up"><i class="bi bi-arrow-up-short"></i>+12.4% this month</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-xl-2">
+        <div class="stat-card stat-danger">
+          <div class="stat-icon"><i class="bi bi-x-circle-fill"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Refunds</div>
+            <div class="stat-value" data-target="142">0</div>
+            <div class="stat-change down"><i class="bi bi-arrow-down-short"></i>-3.8% this month</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-xl-2">
+        <div class="stat-card stat-info">
+          <div class="stat-icon"><i class="bi bi-eye-fill"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Page Views</div>
+            <div class="stat-value" data-target="182000">0</div>
+            <div class="stat-change up"><i class="bi bi-arrow-up-short"></i>+18.9% this month</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-xl-2">
+        <div class="stat-card stat-purple">
+          <div class="stat-icon"><i class="bi bi-star-fill"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Avg Rating</div>
+            <div class="stat-value" data-target="4.8" style="font-size:1.6rem;">0</div>
+            <div class="stat-change up"><i class="bi bi-arrow-up-short"></i>+0.3 this month</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ROW 2: REVENUE CHART + DONUT ══ -->
+    <div class="row g-3 mb-4">
+      <div class="col-lg-8">
+        <div class="card-custom h-100">
+          <div class="card-header-custom">
+            <div>
+              <div class="card-title">Revenue Overview</div>
+              <div class="card-subtitle">Monthly revenue vs target — 2024</div>
+            </div>
+            <div class="d-flex gap-2">
+              <select class="form-select form-select-sm" style="width:auto;font-family:Nunito;font-size:.8rem;border-radius:8px;">
+                <option>2024</option>
+                <option>2023</option>
+              </select>
+            </div>
+          </div>
+          <div class="card-body-custom">
+            <div class="chart-wrap" style="height:260px;">
+              <canvas id="revenueChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card-custom h-100">
+          <div class="card-header-custom">
+            <div>
+              <div class="card-title">Sales by Category</div>
+              <div class="card-subtitle">Current period breakdown</div>
+            </div>
+          </div>
+          <div class="card-body-custom d-flex flex-column align-items-center">
+            <div class="chart-wrap" style="height:200px;width:200px;">
+              <canvas id="donutChart"></canvas>
+            </div>
+            <div class="w-100 mt-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span style="font-size:.82rem;font-weight:700;color:#2d3748;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#435ebe;margin-right:7px;"></span>Electronics</span>
+                <span style="font-size:.82rem;font-weight:700;color:#435ebe;">38%</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span style="font-size:.82rem;font-weight:700;color:#2d3748;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#198754;margin-right:7px;"></span>Clothing</span>
+                <span style="font-size:.82rem;font-weight:700;color:#198754;">25%</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span style="font-size:.82rem;font-weight:700;color:#2d3748;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ffc107;margin-right:7px;"></span>Home &amp; Garden</span>
+                <span style="font-size:.82rem;font-weight:700;color:#c9920a;">22%</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span style="font-size:.82rem;font-weight:700;color:#2d3748;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#dc3545;margin-right:7px;"></span>Others</span>
+                <span style="font-size:.82rem;font-weight:700;color:#dc3545;">15%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ROW 3: VISITORS CHART + ACTIVITY ══ -->
+    <div class="row g-3 mb-4">
+      <div class="col-lg-7">
+        <div class="card-custom h-100">
+          <div class="card-header-custom">
+            <div>
+              <div class="card-title">Visitor Analytics</div>
+              <div class="card-subtitle">Unique vs returning visitors — last 7 days</div>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-primary" style="border-radius:8px;font-family:Nunito;font-weight:700;font-size:.78rem;padding:5px 14px;">Weekly</button>
+              <button class="btn btn-sm btn-outline-secondary" style="border-radius:8px;font-family:Nunito;font-weight:700;font-size:.78rem;padding:5px 14px;">Monthly</button>
+            </div>
+          </div>
+          <div class="card-body-custom">
+            <div class="chart-wrap" style="height:220px;">
+              <canvas id="visitorsChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="card-custom h-100">
+          <div class="card-header-custom">
+            <div>
+              <div class="card-title">Recent Activity</div>
+              <div class="card-subtitle">Latest system events</div>
+            </div>
+            <a href="#" style="font-size:.78rem;color:var(--primary);font-weight:700;">View All</a>
+          </div>
+          <div class="card-body-custom">
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#435ebe;"></div>
+              <div class="activity-content">
+                <p>New user <strong>Sarah K.</strong> registered</p>
+                <span>2 minutes ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#198754;"></div>
+              <div class="activity-content">
+                <p>Order <strong>#ORD-1042</strong> marked as shipped</p>
+                <span>18 minutes ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#ffc107;"></div>
+              <div class="activity-content">
+                <p>Product <strong>"UltraPhone 15"</strong> stock low</p>
+                <span>1 hour ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#dc3545;"></div>
+              <div class="activity-content">
+                <p>Refund requested for Order <strong>#ORD-1039</strong></p>
+                <span>2 hours ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#6f42c1;"></div>
+              <div class="activity-content">
+                <p>New <strong>5-star review</strong> on "Smart Watch X"</p>
+                <span>4 hours ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#0dcaf0;"></div>
+              <div class="activity-content">
+                <p>Admin <strong>Alex M.</strong> updated pricing rules</p>
+                <span>Yesterday</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ROW 4: TOP PRODUCTS TABLE ══ -->
+    <div class="row g-3 mb-4">
+      <div class="col-12">
+        <div class="card-custom">
+          <div class="card-header-custom mb-0" style="padding-bottom:14px;">
+            <div>
+              <div class="card-title">Top Products</div>
+              <div class="card-subtitle">Best performing products this month</div>
+            </div>
+            <div class="d-flex gap-2">
+              <input type="text" class="form-control form-control-sm" placeholder="Search products…" style="width:200px;border-radius:8px;font-family:Nunito;font-size:.82rem;" />
+              <button class="btn btn-primary btn-sm" style="border-radius:8px;font-family:Nunito;font-weight:700;white-space:nowrap;">
+                <i class="bi bi-plus-lg me-1"></i>Add Product
+              </button>
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="table-custom">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Sales</th>
+                  <th>Revenue</th>
+                  <th>Stock</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="color:#a0a8c0;font-weight:700;">01</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-3">
+                      <div style="width:38px;height:38px;background:rgba(67,94,190,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">📱</div>
+                      <div>
+                        <div style="font-weight:700;font-size:.875rem;">UltraPhone 15 Pro</div>
+                        <div style="font-size:.72rem;color:#8a8fa8;">SKU: UP-15-PRO</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-primary-soft">Electronics</span></td>
+                  <td style="font-weight:700;">$1,299</td>
+                  <td style="font-weight:700;">842</td>
+                  <td style="font-weight:800;color:#198754;">$109,358</td>
+                  <td>
+                    <div style="font-size:.8rem;font-weight:700;margin-bottom:4px;">248 / 500</div>
+                    <div class="progress-custom" style="width:90px;">
+                      <div class="progress-bar-custom" style="width:49.6%;background:#198754;"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-success-soft"><i class="bi bi-circle-fill" style="font-size:.5rem;"></i> Active</span></td>
+                  <td>
+                    <div class="d-flex gap-1">
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(67,94,190,.1);color:#435ebe;border:none;" title="Edit"><i class="bi bi-pencil-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(13,202,240,.1);color:#0ab8d8;border:none;" title="View"><i class="bi bi-eye-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(220,53,69,.1);color:#dc3545;border:none;" title="Delete"><i class="bi bi-trash-fill" style="font-size:.75rem;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color:#a0a8c0;font-weight:700;">02</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-3">
+                      <div style="width:38px;height:38px;background:rgba(25,135,84,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">⌚</div>
+                      <div>
+                        <div style="font-weight:700;font-size:.875rem;">Smart Watch Series X</div>
+                        <div style="font-size:.72rem;color:#8a8fa8;">SKU: SW-SX-01</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-primary-soft">Electronics</span></td>
+                  <td style="font-weight:700;">$499</td>
+                  <td style="font-weight:700;">1,203</td>
+                  <td style="font-weight:800;color:#198754;">$59,997</td>
+                  <td>
+                    <div style="font-size:.8rem;font-weight:700;margin-bottom:4px;">78 / 300</div>
+                    <div class="progress-custom" style="width:90px;">
+                      <div class="progress-bar-custom" style="width:26%;background:#ffc107;"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-warning-soft"><i class="bi bi-circle-fill" style="font-size:.5rem;"></i> Low Stock</span></td>
+                  <td>
+                    <div class="d-flex gap-1">
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(67,94,190,.1);color:#435ebe;border:none;"><i class="bi bi-pencil-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(13,202,240,.1);color:#0ab8d8;border:none;"><i class="bi bi-eye-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(220,53,69,.1);color:#dc3545;border:none;"><i class="bi bi-trash-fill" style="font-size:.75rem;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color:#a0a8c0;font-weight:700;">03</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-3">
+                      <div style="width:38px;height:38px;background:rgba(255,193,7,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">💻</div>
+                      <div>
+                        <div style="font-weight:700;font-size:.875rem;">ProBook Laptop 14"</div>
+                        <div style="font-size:.72rem;color:#8a8fa8;">SKU: PB-14-STD</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-primary-soft">Electronics</span></td>
+                  <td style="font-weight:700;">$1,099</td>
+                  <td style="font-weight:700;">531</td>
+                  <td style="font-weight:800;color:#198754;">$58,357</td>
+                  <td>
+                    <div style="font-size:.8rem;font-weight:700;margin-bottom:4px;">152 / 200</div>
+                    <div class="progress-custom" style="width:90px;">
+                      <div class="progress-bar-custom" style="width:76%;background:#435ebe;"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-success-soft"><i class="bi bi-circle-fill" style="font-size:.5rem;"></i> Active</span></td>
+                  <td>
+                    <div class="d-flex gap-1">
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(67,94,190,.1);color:#435ebe;border:none;"><i class="bi bi-pencil-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(13,202,240,.1);color:#0ab8d8;border:none;"><i class="bi bi-eye-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(220,53,69,.1);color:#dc3545;border:none;"><i class="bi bi-trash-fill" style="font-size:.75rem;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color:#a0a8c0;font-weight:700;">04</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-3">
+                      <div style="width:38px;height:38px;background:rgba(111,66,193,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🎧</div>
+                      <div>
+                        <div style="font-weight:700;font-size:.875rem;">NoiseFree Headphones</div>
+                        <div style="font-size:.72rem;color:#8a8fa8;">SKU: NF-HP-BLK</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-primary-soft">Electronics</span></td>
+                  <td style="font-weight:700;">$299</td>
+                  <td style="font-weight:700;">2,140</td>
+                  <td style="font-weight:800;color:#198754;">$63,966</td>
+                  <td>
+                    <div style="font-size:.8rem;font-weight:700;margin-bottom:4px;">0 / 400</div>
+                    <div class="progress-custom" style="width:90px;">
+                      <div class="progress-bar-custom" style="width:0%;background:#dc3545;"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-danger-soft"><i class="bi bi-circle-fill" style="font-size:.5rem;"></i> Out of Stock</span></td>
+                  <td>
+                    <div class="d-flex gap-1">
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(67,94,190,.1);color:#435ebe;border:none;"><i class="bi bi-pencil-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(13,202,240,.1);color:#0ab8d8;border:none;"><i class="bi bi-eye-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(220,53,69,.1);color:#dc3545;border:none;"><i class="bi bi-trash-fill" style="font-size:.75rem;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color:#a0a8c0;font-weight:700;">05</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-3">
+                      <div style="width:38px;height:38px;background:rgba(220,53,69,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">👕</div>
+                      <div>
+                        <div style="font-weight:700;font-size:.875rem;">Urban Comfort Hoodie</div>
+                        <div style="font-size:.72rem;color:#8a8fa8;">SKU: UCH-GRY-M</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-info-soft">Clothing</span></td>
+                  <td style="font-weight:700;">$89</td>
+                  <td style="font-weight:700;">3,420</td>
+                  <td style="font-weight:800;color:#198754;">$30,438</td>
+                  <td>
+                    <div style="font-size:.8rem;font-weight:700;margin-bottom:4px;">610 / 1000</div>
+                    <div class="progress-custom" style="width:90px;">
+                      <div class="progress-bar-custom" style="width:61%;background:#198754;"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge-custom badge-success-soft"><i class="bi bi-circle-fill" style="font-size:.5rem;"></i> Active</span></td>
+                  <td>
+                    <div class="d-flex gap-1">
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(67,94,190,.1);color:#435ebe;border:none;"><i class="bi bi-pencil-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(13,202,240,.1);color:#0ab8d8;border:none;"><i class="bi bi-eye-fill" style="font-size:.75rem;"></i></button>
+                      <button class="btn btn-sm" style="width:30px;height:30px;padding:0;border-radius:8px;background:rgba(220,53,69,.1);color:#dc3545;border:none;"><i class="bi bi-trash-fill" style="font-size:.75rem;"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination -->
+          <div class="d-flex justify-content-between align-items-center px-3 pb-3 pt-2" style="flex-wrap:wrap;gap:10px;">
+            <div style="font-size:.8rem;color:#8a8fa8;font-weight:600;">Showing 1–5 of 48 products</div>
+            <nav>
+              <ul class="pagination pagination-sm mb-0" style="gap:4px;">
+                <li class="page-item disabled"><a class="page-link" href="#" style="border-radius:8px;font-family:Nunito;font-weight:700;">&laquo;</a></li>
+                <li class="page-item active"><a class="page-link" href="#" style="border-radius:8px;font-family:Nunito;font-weight:700;background:#435ebe;border-color:#435ebe;">1</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border-radius:8px;font-family:Nunito;font-weight:700;">2</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border-radius:8px;font-family:Nunito;font-weight:700;">3</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="border-radius:8px;font-family:Nunito;font-weight:700;">&raquo;</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ROW 5: RECENT ORDERS + TOP USERS ══ -->
+    <div class="row g-3">
+      <div class="col-lg-7">
+        <div class="card-custom">
+          <div class="card-header-custom">
+            <div>
+              <div class="card-title">Recent Orders</div>
+              <div class="card-subtitle">Last 5 incoming orders</div>
+            </div>
+            <a href="#" style="font-size:.78rem;color:var(--primary);font-weight:700;">View All</a>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="table-custom">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight:700;color:var(--primary);">#ORD-1048</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <img src="https://i.pravatar.cc/40?img=1" class="avatar avatar-sm" alt="">
+                      <span style="font-weight:700;">Priya Sharma</span>
+                    </div>
+                  </td>
+                  <td style="font-weight:700;">$1,299</td>
+                  <td style="color:#8a8fa8;">May 22, 2026</td>
+                  <td><span class="badge-custom badge-warning-soft">Pending</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;color:var(--primary);">#ORD-1047</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <img src="https://i.pravatar.cc/40?img=5" class="avatar avatar-sm" alt="">
+                      <span style="font-weight:700;">Rahul Kumar</span>
+                    </div>
+                  </td>
+                  <td style="font-weight:700;">$499</td>
+                  <td style="color:#8a8fa8;">May 21, 2026</td>
+                  <td><span class="badge-custom badge-success-soft">Shipped</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;color:var(--primary);">#ORD-1046</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <img src="https://i.pravatar.cc/40?img=8" class="avatar avatar-sm" alt="">
+                      <span style="font-weight:700;">Emily Chen</span>
+                    </div>
+                  </td>
+                  <td style="font-weight:700;">$188</td>
+                  <td style="color:#8a8fa8;">May 20, 2026</td>
+                  <td><span class="badge-custom badge-success-soft">Delivered</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;color:var(--primary);">#ORD-1045</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <img src="https://i.pravatar.cc/40?img=11" class="avatar avatar-sm" alt="">
+                      <span style="font-weight:700;">James Walker</span>
+                    </div>
+                  </td>
+                  <td style="font-weight:700;">$2,198</td>
+                  <td style="color:#8a8fa8;">May 19, 2026</td>
+                  <td><span class="badge-custom badge-danger-soft">Refunded</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;color:var(--primary);">#ORD-1044</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <img src="https://i.pravatar.cc/40?img=15" class="avatar avatar-sm" alt="">
+                      <span style="font-weight:700;">Aisha Patel</span>
+                    </div>
+                  </td>
+                  <td style="font-weight:700;">$89</td>
+                  <td style="color:#8a8fa8;">May 18, 2026</td>
+                  <td><span class="badge-custom badge-info-soft">Processing</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="card-custom h-100">
+          <div class="card-header-custom">
+            <div>
+              <div class="card-title">Top Customers</div>
+              <div class="card-subtitle">By total spend this month</div>
+            </div>
+          </div>
+          <div class="card-body-custom">
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://i.pravatar.cc/48?img=20" class="avatar avatar-md" alt="">
+                <div style="flex:1;min-width:0;">
+                  <div style="font-weight:700;font-size:.875rem;">Sarah Johnson</div>
+                  <div style="font-size:.72rem;color:#8a8fa8;">14 orders · VIP</div>
+                  <div class="progress-custom mt-1"><div class="progress-bar-custom" style="width:88%;background:#435ebe;"></div></div>
+                </div>
+                <div style="font-weight:800;color:#198754;white-space:nowrap;">$12,440</div>
+              </div>
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://i.pravatar.cc/48?img=25" class="avatar avatar-md" alt="">
+                <div style="flex:1;min-width:0;">
+                  <div style="font-weight:700;font-size:.875rem;">Michael Torres</div>
+                  <div style="font-size:.72rem;color:#8a8fa8;">11 orders · Premium</div>
+                  <div class="progress-custom mt-1"><div class="progress-bar-custom" style="width:72%;background:#198754;"></div></div>
+                </div>
+                <div style="font-weight:800;color:#198754;white-space:nowrap;">$9,870</div>
+              </div>
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://i.pravatar.cc/48?img=30" class="avatar avatar-md" alt="">
+                <div style="flex:1;min-width:0;">
+                  <div style="font-weight:700;font-size:.875rem;">Priya Nair</div>
+                  <div style="font-size:.72rem;color:#8a8fa8;">9 orders · Premium</div>
+                  <div class="progress-custom mt-1"><div class="progress-bar-custom" style="width:61%;background:#6f42c1;"></div></div>
+                </div>
+                <div style="font-weight:800;color:#198754;white-space:nowrap;">$8,290</div>
+              </div>
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://i.pravatar.cc/48?img=35" class="avatar avatar-md" alt="">
+                <div style="flex:1;min-width:0;">
+                  <div style="font-weight:700;font-size:.875rem;">David Kim</div>
+                  <div style="font-size:.72rem;color:#8a8fa8;">7 orders · Standard</div>
+                  <div class="progress-custom mt-1"><div class="progress-bar-custom" style="width:48%;background:#ffc107;"></div></div>
+                </div>
+                <div style="font-weight:800;color:#198754;white-space:nowrap;">$6,540</div>
+              </div>
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://i.pravatar.cc/48?img=40" class="avatar avatar-md" alt="">
+                <div style="flex:1;min-width:0;">
+                  <div style="font-weight:700;font-size:.875rem;">Fatima Al-Hassan</div>
+                  <div style="font-size:.72rem;color:#8a8fa8;">6 orders · Standard</div>
+                  <div class="progress-custom mt-1"><div class="progress-bar-custom" style="width:36%;background:#0dcaf0;"></div></div>
+                </div>
+                <div style="font-weight:800;color:#198754;white-space:nowrap;">$4,920</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <!-- ── END PAGE CONTENT ── -->
+
+</div>
+<!-- ===== END MAIN CONTENT ===== -->
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<!-- Custom JS -->
+<script src="js/main.js"></script>
+
+<script>
+// ── Revenue Chart ──────────────────────────────────────────
+(function() {
+  const ctx = document.getElementById('revenueChart').getContext('2d');
+  const labels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const revenue = [42000,55000,48000,61000,73000,68000,80000,75000,88000,92000,85000,97000];
+  const target  = [60000,60000,65000,65000,70000,70000,75000,75000,85000,85000,90000,90000];
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Revenue',
+          data: revenue,
+          backgroundColor: '#435ebe',
+          borderRadius: 6,
+          borderSkipped: false,
+          barPercentage: 0.55,
+        },
+        {
+          label: 'Target',
+          data: target,
+          type: 'line',
+          borderColor: '#ffc107',
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          borderDash: [6,4],
+          pointBackgroundColor: '#ffc107',
+          pointRadius: 4,
+          tension: 0.4,
+        }
+      ]
+    },
+    options: {
+      ...defaultChartOptions,
+      plugins: {
+        ...defaultChartOptions.plugins,
+        legend: { ...defaultChartOptions.plugins.legend },
+        tooltip: {
+          ...defaultChartOptions.plugins.tooltip,
+          callbacks: {
+            label: ctx => ' $' + ctx.parsed.y.toLocaleString()
+          }
+        }
+      },
+      scales: {
+        ...defaultChartOptions.scales,
+        y: {
+          ...defaultChartOptions.scales.y,
+          ticks: { ...defaultChartOptions.scales.y.ticks, callback: v => '$' + (v/1000)+'k' }
+        }
+      }
+    }
+  });
+})();
+
+// ── Donut Chart ────────────────────────────────────────────
+(function() {
+  const ctx = document.getElementById('donutChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Electronics','Clothing','Home & Garden','Others'],
+      datasets: [{
+        data: [38,25,22,15],
+        backgroundColor: ['#435ebe','#198754','#ffc107','#dc3545'],
+        borderWidth: 0,
+        hoverOffset: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '72%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          ...defaultChartOptions.plugins.tooltip,
+          callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%' }
+        }
+      }
+    }
+  });
+})();
+
+// ── Visitors Chart ─────────────────────────────────────────
+(function() {
+  const ctx = document.getElementById('visitorsChart').getContext('2d');
+  const grad1 = ctx.createLinearGradient(0,0,0,250);
+  grad1.addColorStop(0,'rgba(67,94,190,0.3)');
+  grad1.addColorStop(1,'rgba(67,94,190,0)');
+  const grad2 = ctx.createLinearGradient(0,0,0,250);
+  grad2.addColorStop(0,'rgba(25,135,84,0.25)');
+  grad2.addColorStop(1,'rgba(25,135,84,0)');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      datasets: [
+        {
+          label: 'Unique Visitors',
+          data: [3200,4800,4200,5600,6100,4400,3900],
+          borderColor: '#435ebe',
+          backgroundColor: grad1,
+          borderWidth: 2.5,
+          fill: true,
+          tension: 0.45,
+          pointBackgroundColor: '#435ebe',
+          pointRadius: 4,
+          pointHoverRadius: 7,
+        },
+        {
+          label: 'Returning',
+          data: [1800,2400,2200,2900,3100,2600,2200],
+          borderColor: '#198754',
+          backgroundColor: grad2,
+          borderWidth: 2.5,
+          fill: true,
+          tension: 0.45,
+          pointBackgroundColor: '#198754',
+          pointRadius: 4,
+          pointHoverRadius: 7,
+        }
+      ]
+    },
+    options: defaultChartOptions
+  });
+})();
+</script>
+
+</body>
+</html>
