@@ -162,3 +162,251 @@ const defaultChartOptions = {
     }
   }
 };
+
+/* =========================================================
+   PRODUCTS TABLE FUNCTIONALITIES
+========================================================= */
+
+$(document).ready(function () {
+
+  // =========================================
+  // PRODUCTS TABLE
+  // =========================================
+
+  const productTable = $('#productsTable').DataTable({
+    pageLength: 5,
+    responsive: true,
+    lengthMenu: [5, 10, 25, 50]
+  });
+
+  // =========================================
+  // ORDERS TABLE
+  // =========================================
+
+  $('#ordersTable').DataTable({
+    pageLength: 5,
+    responsive: true,
+    lengthMenu: [5, 10, 25, 50]
+  });
+
+  // =========================================
+  // SEARCH PRODUCTS
+  // =========================================
+
+  $('.form-control-sm').on('keyup', function () {
+    productTable.search($(this).val()).draw();
+  });
+
+  // =========================================
+  // ADD PRODUCT
+  // =========================================
+
+  $('.btn-primary').on('click', function () {
+
+    const productName = prompt("Enter Product Name");
+    if (!productName) return;
+
+    const category = prompt("Enter Category");
+    const price = prompt("Enter Price");
+    const sales = prompt("Enter Sales");
+    const revenue = prompt("Enter Revenue");
+    const stock = prompt("Enter Stock");
+    const status = prompt("Enter Status");
+
+    const rowCount = productTable.rows().count() + 1;
+
+    productTable.row.add([
+
+      rowCount,
+
+      `
+      <div class="d-flex align-items-center gap-3">
+
+        <div style="
+          width:38px;
+          height:38px;
+          background:rgba(67,94,190,.12);
+          border-radius:10px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-size:1.1rem;">
+          📦
+        </div>
+
+        <div>
+          <div style="font-weight:700;font-size:.875rem;">
+            ${productName}
+          </div>
+
+          <div style="font-size:.72rem;color:#8a8fa8;">
+            NEW PRODUCT
+          </div>
+        </div>
+
+      </div>
+      `,
+
+      `<span class="badge-custom badge-primary-soft">${category}</span>`,
+
+      `$${price}`,
+
+      sales,
+
+      `<span style="font-weight:800;color:#198754;">
+        $${revenue}
+      </span>`,
+
+      `
+      <div style="font-size:.8rem;font-weight:700;margin-bottom:4px;">
+        ${stock}
+      </div>
+
+      <div class="progress-custom" style="width:90px;">
+        <div class="progress-bar-custom"
+        style="width:70%;background:#198754;">
+        </div>
+      </div>
+      `,
+
+      `<span class="badge-custom badge-success-soft">
+        ${status}
+      </span>`,
+
+      `
+      <div class="d-flex gap-1">
+
+        <button class="editBtn btn btn-sm"
+        style="
+          width:30px;
+          height:30px;
+          padding:0;
+          border-radius:8px;
+          background:rgba(67,94,190,.1);
+          color:#435ebe;
+          border:none;">
+
+          <i class="bi bi-pencil-fill"></i>
+
+        </button>
+
+        <button class="viewBtn btn btn-sm"
+        style="
+          width:30px;
+          height:30px;
+          padding:0;
+          border-radius:8px;
+          background:rgba(13,202,240,.1);
+          color:#0ab8d8;
+          border:none;">
+
+          <i class="bi bi-eye-fill"></i>
+
+        </button>
+
+        <button class="deleteBtn btn btn-sm"
+        style="
+          width:30px;
+          height:30px;
+          padding:0;
+          border-radius:8px;
+          background:rgba(220,53,69,.1);
+          color:#dc3545;
+          border:none;">
+
+          <i class="bi bi-trash-fill"></i>
+
+        </button>
+
+      </div>
+      `
+
+    ]).draw(false);
+
+  });
+
+  // =========================================
+  // DELETE PRODUCT
+  // =========================================
+
+  $('#productsTable tbody').on('click', '.deleteBtn', function () {
+
+    if (confirm("Delete this product?")) {
+
+      productTable
+        .row($(this).parents('tr'))
+        .remove()
+        .draw();
+
+    }
+
+  });
+
+  // =========================================
+  // EDIT PRODUCT
+  // =========================================
+
+  $('#productsTable tbody').on('click', '.editBtn', function () {
+
+    const row = productTable.row($(this).parents('tr'));
+    const data = row.data();
+
+    const updatedName = prompt("Edit Product Name");
+
+    if (updatedName) {
+
+      data[1] = `
+      <div class="d-flex align-items-center gap-3">
+
+        <div style="
+          width:38px;
+          height:38px;
+          background:rgba(67,94,190,.12);
+          border-radius:10px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-size:1.1rem;">
+          📦
+        </div>
+
+        <div>
+
+          <div style="font-weight:700;font-size:.875rem;">
+            ${updatedName}
+          </div>
+
+          <div style="font-size:.72rem;color:#8a8fa8;">
+            UPDATED PRODUCT
+          </div>
+
+        </div>
+
+      </div>
+      `;
+
+      row.data(data).draw();
+
+    }
+
+  });
+
+  // =========================================
+  // VIEW PRODUCT
+  // =========================================
+
+  $('#productsTable tbody').on('click', '.viewBtn', function () {
+
+    const row = productTable.row($(this).parents('tr')).data();
+
+    alert(
+      "PRODUCT DETAILS\n\n" +
+      "Product: " + $(row[1]).text().trim() + "\n" +
+      "Category: " + $(row[2]).text().trim() + "\n" +
+      "Price: " + row[3] + "\n" +
+      "Sales: " + row[4]
+    );
+
+  });
+
+});
