@@ -3,21 +3,39 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── Sidebar Toggle ──────────────────────────────────────
-  const toggleBtn = document.getElementById('sidebarToggle');
-  const overlay   = document.getElementById('sidebarOverlay');
+  // ── Sidebar Toggle ──────────────────────────────────────
+const toggleBtn = document.getElementById('sidebarToggle');
+const overlay   = document.getElementById('sidebarOverlay');
 
-  function toggleSidebar() {
-    if (window.innerWidth <= 991) {
-      document.body.classList.toggle('sidebar-open');
-    } else {
-      document.body.classList.toggle('sidebar-collapsed');
-    }
-  }
-
-  toggleBtn?.addEventListener('click', toggleSidebar);
-  overlay?.addEventListener('click', () => {
+function openSidebar() {
+  if (window.innerWidth <= 991) {
+    document.body.classList.add('sidebar-open');
+    document.body.classList.remove('sidebar-collapsed');
+  } else {
+    document.body.classList.add('sidebar-collapsed');
     document.body.classList.remove('sidebar-open');
-  });
+  }
+}
+
+function closeSidebar() {
+  document.body.classList.remove('sidebar-open');
+  document.body.classList.remove('sidebar-collapsed');
+}
+
+// Toggle button
+toggleBtn?.addEventListener('click', () => {
+  if (
+    document.body.classList.contains('sidebar-open') ||
+    document.body.classList.contains('sidebar-collapsed')
+  ) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+});
+
+// Overlay click = ALWAYS close
+overlay?.addEventListener('click', closeSidebar);
 
   // ── Sidebar Submenu ─────────────────────────────────────
   document.querySelectorAll('.sidebar-link[data-submenu]').forEach(link => {
@@ -409,4 +427,39 @@ $(document).ready(function () {
 
   });
 
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("sidebarToggle");
+  const body = document.body;
+  const overlay = document.getElementById("sidebarOverlay");
+
+  // toggle sidebar
+  toggleBtn.addEventListener("click", () => {
+    body.classList.toggle("sidebar-open");
+    overlay.classList.toggle("show");
+  });
+
+  // click overlay closes sidebar
+  overlay.addEventListener("click", () => {
+    body.classList.remove("sidebar-open");
+    overlay.classList.remove("show");
+  });
+});
+const toggleBtn = document.getElementById("darkModeToggle");
+const body = document.body;
+
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+  body.classList.add("dark-mode");
+}
+
+toggleBtn.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+
+  if (body.classList.contains("dark-mode")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
 });
